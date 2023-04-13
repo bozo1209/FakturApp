@@ -26,9 +26,29 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+//        resources.excludes.add("META-INF/LICENSE-LGPL-3.txt")
+//        resources.excludes.add("META-INF/LICENSE-W3C-TEST")
+//        resources.excludes.add("META-INF/LICENSE-*")
+//        resources.excludes.add("resources/**")
+//        resources.excludes.add("META-INF/DEPENDENCIES")
+//        resources.excludes.add("Mresources/conf/xhtmlrenderer.conf")
+//        resources.excludes.add("Mresources/conf/xhtmlrenderer.conf")
+//        resources.excludes.add("Mresources/conf/xhtmlrenderer.conf")
+    }
 }
 
 dependencies {
+
+    implementation("org.thymeleaf:thymeleaf:3.0.15.RELEASE")
+//    implementation("org.jsoup:jsoup:1.13.1")
+//    implementation("org.xhtmlrenderer:flying-saucer-pdf-openpdf:9.1.22")
+//    implementation("com.openhtmltopdf:openhtmltopdf-pdfbox:1.0.6")
+//    implementation("com.openhtmltopdf:openhtmltopdf-core:1.0.6")
+//    implementation("org.apache.pdfbox:pdfbox:2.0.24")
+    implementation("com.itextpdf:itextg:5.5.10")
+    implementation("com.itextpdf.tool:xmlworker:5.5.13.2")
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
