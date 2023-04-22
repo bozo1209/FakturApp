@@ -5,7 +5,7 @@ import androidx.core.provider.FontRequest;
 
 import android.os.Bundle;
 
-import com.example.fakturapp.R;
+import com.fakturapp.R;
 
 public class EditProfile extends AppCompatActivity {
 

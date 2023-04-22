@@ -1,0 +1,8 @@
+
+<body style="background-color: black;">
+<h1 style="color:red;">test resources</h1>
+<h1 style="color:white;">hello {$test}</h1>
+<h1 style="color:white;">hello {$user.name}</h1>
+<h1 style="color:white;">hello {$user.address.city}</h1>
+</body>
+

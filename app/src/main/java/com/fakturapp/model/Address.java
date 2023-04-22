@@ -1,6 +1,9 @@
 package com.fakturapp.model;
 
-public class Address {
+import com.x5.util.AccessAsBean;
+
+@AccessAsBean
+public class Address extends BaseEntity{
     private String city;
     private String street;
     private String number;
@@ -10,6 +13,14 @@ public class Address {
     }
 
     public Address(String city, String street, String number, String place) {
+        this.city = city;
+        this.street = street;
+        this.number = number;
+        this.place = place;
+    }
+
+    public Address(int id, String city, String street, String number, String place) {
+        super(id);
         this.city = city;
         this.street = street;
         this.number = number;

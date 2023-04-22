@@ -1,0 +1,6 @@
+{#faktura}
+<body>
+<h1>test assets</h1>
+<h1>hello {$test}</h1>
+</body>
+{#}

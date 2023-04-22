@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.example.fakturapp.R;
+import com.fakturapp.R;
 import com.fakturapp.model.TemplateTestMain;
 import com.itextpdf.text.DocumentException;
+import com.x5.template.Chunk;
+import com.x5.template.Theme;
+import com.x5.template.providers.AndroidTemplates;
 //import com.lowagie.text.DocumentException;
 
 //import org.apache.pdfbox.pdmodel.PDDocument;
@@ -46,8 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
             TemplateTestMain.templateTestMain(getApplicationContext());
         } catch ( IOException e) {
+            System.out.println("1");
             throw new RuntimeException(e);
         } catch (DocumentException e) {
+            System.out.println("2");
             throw new RuntimeException(e);
         }
 
@@ -59,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         String ret = "";
         for (String s : strings){
             if (s.equalsIgnoreCase("temp.txt")){
-                System.out.println("helllllle");
+                System.out.println("helllllle2");
                 try {
                     FileInputStream fileInputStream = applicationContext.openFileInput(s);
                     if (fileInputStream != null){
@@ -76,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                                 }
                             } catch (IOException e) {
+                                System.out.println("3");
                                 throw new RuntimeException(e);
                             }
                         }
@@ -85,16 +91,19 @@ public class MainActivity extends AppCompatActivity {
                     ret = sb.toString();
                     }
                 } catch (FileNotFoundException e) {
+                    System.out.println("4");
                     throw new RuntimeException(e);
                 } catch (IOException e) {
+                    System.out.println("5");
                     throw new RuntimeException(e);
                 }
 
             }
         }
         System.out.println("********");
-        System.out.println(ret);
+        System.out.println("ret " + ret);
         System.out.println("*************2****************");
+
 
     }
 }

@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.fakturapp.R;
+import com.fakturapp.R;
 
 public class AddClient extends AppCompatActivity {
 

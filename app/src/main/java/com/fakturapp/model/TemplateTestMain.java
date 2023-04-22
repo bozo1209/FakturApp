@@ -15,6 +15,9 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
+import com.x5.template.Chunk;
+import com.x5.template.Theme;
+import com.x5.template.providers.AndroidTemplates;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -25,17 +28,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.time.LocalDateTime;
 
 public class TemplateTestMain {
     public static void templateTestMain(android.content.Context context) throws IOException, DocumentException {
         TemplateTestMain templateTestMain = new TemplateTestMain();
-        templateTestMain.generatePdfFromHtml4(templateTestMain.parseThymeleafTemplate(), context);
-        templateTestMain.readPdf();
+//        templateTestMain.generatePdfFromHtml4(templateTestMain.parseThymeleafTemplate(), context);
+//        templateTestMain.readPdf();
 
-        String s = templateTestMain.parseThymeleafTemplate();
-        System.out.println("***************html******************");
-        System.out.println(s);
-        System.out.println("***************html******************");
+//        String s = templateTestMain.parseThymeleafTemplate();
+//        System.out.println("***************html******************");
+//        System.out.println("s " + s);
+//        System.out.println("***************html******************");
+
+        System.out.println("***********start***chunk*****************");
+        templateTestMain.generatePdfFromHtml4(templateTestMain.parseChunkTemplate(context), context);
+        System.out.println("**********chunk html***************");
+        String s1 = templateTestMain.parseChunkTemplate(context);
+        System.out.println("s1 = " + s1);
+        System.out.println("**********chunk html***************");
     }
 
     public void simpleFile(android.content.Context context){
@@ -98,7 +109,7 @@ public class TemplateTestMain {
 
 
         File filesDir = context.getFilesDir();
-        File file = new File(filesDir, "template.pdf");
+        File file = new File(filesDir, "template" + LocalDateTime.now().getNano() + ".pdf");
         String path = file.getPath();
         PdfWriter pdfWriter = null;
         Document document = new Document();
@@ -117,8 +128,8 @@ public class TemplateTestMain {
         pdfWriter.close();
         System.out.println("*********ddddd***********");
 
-        System.out.println(document.getPageSize());
-        System.out.println(file.getPath());
+        System.out.println("document.getPageSize() " + document.getPageSize());
+        System.out.println("file.getPath() " + file.getPath());
         System.out.println("************d***********");
 
 
@@ -136,7 +147,7 @@ public class TemplateTestMain {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setCharacterEncoding("UTF-8");
         System.out.println("**********************");
-        System.out.println(templateResolver.getPrefix());
+        System.out.println("templateResolver.getPrefix() " + templateResolver.getPrefix());
         System.out.println("**********************");
 //        templateResolver.setPrefix("file:///android_asset/templates/");
         templateResolver.setSuffix(".html");
@@ -148,6 +159,29 @@ public class TemplateTestMain {
         Context context = new Context();
         context.setVariable("myText", "moj test");
 
+        Address address = new Address(1, "M-ce", "street", "number", "place");
+        TestowyUser stefan = new TestowyUser(1, "stefan", address);
+
+        context.setVariable("user", stefan);
+
         return templateEngine.process("faktura-template.html", context);
+    }
+
+    public String parseChunkTemplate(android.content.Context applicationContext2){
+        System.out.println("***********chunk*****************");
+        AndroidTemplates loader = new AndroidTemplates(applicationContext2);
+//        Theme theme = new Theme(loader);
+        Theme theme = new Theme();
+        Chunk html = theme.makeChunk("faktura-template2");
+
+        Address address = new Address(1, "M-ce", "street", "number", "place");
+        TestowyUser stefan = new TestowyUser(1, "stefan", address);
+
+        html.setToBean("user", stefan);
+        html.set("test", "hahah");
+
+        String s = html.toString();
+        System.out.println("parseChunkTemplate = " + s);
+        return s;
     }
 }
